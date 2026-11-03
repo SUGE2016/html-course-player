@@ -1,0 +1,20 @@
+[
+  {
+    "id": "demo-function", "chapter": "Demo", "page": 1,
+    "page_title": "函数与测试", "kind": "choice", "title": "函数图中的输入参数对应什么？",
+    "code": "", "options": ["传给函数的数据", "函数的名字", "屏幕的颜色"],
+    "answer": 0, "explanation": "输入参数把数据交给函数；函数处理后可返回结果。"
+  },
+  {
+    "id": "demo-add", "chapter": "Demo", "page": 2,
+    "page_title": "一个求和函数", "kind": "tf", "title": "调用 add(2, 3)，返回值是 5。",
+    "code": "def add(a, b):\n    return a + b", "options": ["正确", "错误"],
+    "answer": 0, "explanation": "a 为 2，b 为 3，return a + b 返回 5。"
+  },
+  {
+    "id": "demo-tests", "chapter": "Demo", "page": 3,
+    "page_title": "用测试描述预期", "kind": "poll", "title": "你还想先补充哪类测试？",
+    "code": "", "options": ["两个负数", "小数", "更多零值组合"],
+    "answer": null, "explanation": "三类测试都可扩展覆盖范围，可分别说明自己预期的输入与输出。"
+  }
+]

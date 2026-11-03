@@ -55,5 +55,5 @@
   Reveal.initialize({width:1280,height:720,margin:0,controls:true,progress:true,history:true,center:false,hash:true,slideNumber:'c/t',transition:'fade',backgroundTransition:'fade',...cfg.reveal,plugins:[RevealHighlight]});
   Reveal.on('slidechanged',updateActive); Reveal.on('ready',updateActive);updateActive();
   if(new URLSearchParams(location.search).get('nav')==='open')openNavigation();
-  window.CoursePlayer={version:'0.1.0',config:cfg,openNavigation,closeNavigation};
+  window.CoursePlayer={version:'0.2.0',config:cfg,openNavigation,closeNavigation};
 })();

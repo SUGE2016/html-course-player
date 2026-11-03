@@ -9,3 +9,9 @@ private/
 outputs/
 .DS_Store
 Thumbs.db
+__pycache__/
+*.py[cod]
+.venv/
+classroom/questions.json
+classroom/roster.json
+*.csv
