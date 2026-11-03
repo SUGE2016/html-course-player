@@ -446,7 +446,13 @@ async function boot() {
       $('roster-name').hidden=!rosterEnabled;initStudent();
       try{await api('/api/client',{});}catch(error){if(!guardBlocked)toast(error.message);}
     }
-    if(isDisplay){const config=await api('/api/config');setText('student-url',config.student_url);}
+    if(isDisplay){
+      const config=await api('/api/config');setText('student-url',config.student_url);
+      if(view==='embedded'&&['127.0.0.1','localhost','[::1]'].includes(new URL(config.student_url).hostname)){
+        document.querySelector('.embedded-head .eyebrow').textContent='仅本机试用 · 学生手机无法接入';
+        $('show-access').hidden=true;
+      }
+    }
     if(view==='embedded')await initEmbedded();
     await refresh();
     setInterval(refresh,1000); setInterval(tick,250);
