@@ -10,7 +10,7 @@
 
 下载或克隆仓库后，直接打开 `examples/basic/index.html`。三页示例讲解函数与测试，所需脚本与样式均在本地。
 
-也可使用 Node.js 18 或更新版本，在仓库根目录运行：
+也可使用 Node.js 24 或更新版本，在仓库根目录运行：
 
 ```sh
 npm run demo
@@ -20,10 +20,10 @@ npm run demo
 
 ## 运行页内互动示例
 
-需要 Python 3.10+ 和 Node.js 18+。在仓库根目录执行：
+需要 Node.js 24+。在仓库根目录执行：
 
 ```sh
-python -m pip install -r classroom/requirements.txt
+npm ci
 npm run interactive
 ```
 

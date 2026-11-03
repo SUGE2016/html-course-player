@@ -5,14 +5,34 @@
   "author": "Peter XU",
   "license": "MIT",
   "private": true,
+  "exports": { "./classroom": "./classroom/dist/index.js" },
   "homepage": "https://github.com/SUGE2016/html-course-player",
-  "repository": { "type": "git", "url": "https://github.com/SUGE2016/html-course-player.git" },
-  "keywords": ["education", "slides", "html"],
-  "engines": { "node": ">=18" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SUGE2016/html-course-player.git"
+  },
+  "keywords": [
+    "education",
+    "slides",
+    "html"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "demo": "node player/serve.cjs --chapter examples/basic --port 4189",
-    "interactive": "python classroom/demo.py",
+    "build": "tsc -p classroom/tsconfig.json",
+    "interactive": "npm run build && node classroom/dist/demo.js",
+    "classroom": "npm run build && node classroom/dist/cli.js",
     "test": "node tests/smoke.cjs && node classroom/test_round_controls.cjs && node classroom/test_round_review.cjs",
-    "test:classroom": "python -m unittest discover -s classroom -p test_server.py"
+    "test:classroom": "npm run build && node --test classroom/tests/*.test.mjs"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/qrcode": "^1.5.6",
+    "typescript": "^7.0.2"
   }
 }

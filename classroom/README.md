@@ -1,13 +1,13 @@
 # 课堂互动服务
 
-Python HTTP 服务、SQLite 本地存储，提供页内提问、实时分布、连续多轮作答、轮次查看与对比，以及教师确认的课末表彰。
+TypeScript/Node.js 服务、SQLite 本地存储，提供页内提问、实时分布、连续多轮作答、轮次查看与对比，以及教师确认的课末表彰。需要 Node.js 24+。
 
 ## 最短试用路径
 
 在仓库根目录运行：
 
 ```sh
-python -m pip install -r classroom/requirements.txt
+npm ci
 npm run interactive
 ```
 
@@ -26,7 +26,8 @@ npm run interactive
 学生与教师电脑需处于可互访的网络。把下面的 `YOUR_LAN_IP` 替换为教师电脑的局域网 IPv4：
 
 ```sh
-python classroom/demo.py --host YOUR_LAN_IP
+npm run build
+node classroom/dist/demo.js --host YOUR_LAN_IP
 ```
 
 学生输入 `http://YOUR_LAN_IP:4282/`，或扫描页内面板的“接入二维码”。只需允许学生端口 **4282** 通过所用专用网络的防火墙；教师端口和课件预览端口均为本机访问。默认启动只允许本机试用，不修改防火墙。网络若有客户端隔离，需调整网络接入方式。
@@ -36,7 +37,7 @@ python classroom/demo.py --host YOUR_LAN_IP
 复制样例 JSON 到 Git 忽略的 `private/` 或仓库外目录，填写自己的题目和名册。使用真实资料前应更换演示名册。
 
 ```sh
-python classroom/server.py --host YOUR_LAN_IP --questions private/questions.json --roster private/roster.json --data-dir private/classroom-data --frame-origin http://127.0.0.1:4280
+node classroom/dist/cli.js --host YOUR_LAN_IP --questions private/questions.json --roster private/roster.json --data-dir private/classroom-data --frame-origin http://127.0.0.1:4280
 node player/serve.cjs --chapter examples/interactive --port 4280
 ```
 
@@ -56,10 +57,31 @@ node player/serve.cjs --chapter examples/interactive --port 4280
 
 ## 依赖与测试
 
-业务服务使用 Python 标准库。二维码由 ReportLab 生成，其依赖由 pip 安装；第三方许可见各依赖的发行包。数据库、CSV、虚拟环境和缓存均列入 Git 忽略规则。
+服务使用 Node.js HTTP 与 SQLite 模块，二维码由 qrcode 生成。TypeScript 编译到 classroom/dist。数据库、CSV 和构建输出均列入 Git 忽略规则。Python 文件仅保留作旧版回退参考；日常运行不需要 Python。
 
 ```sh
-python -m unittest discover -s classroom -p test_server.py -v
+npm run test:classroom
 node classroom/test_round_controls.cjs
 node classroom/test_round_review.cjs
 ```
+
+## 作为模块接入 DSH 或其他宿主
+
+宿主在启动时调用 `startClassroom()`，退出时等待 `stop()`。服务返回实际端口地址，支持端口 0 自动分配；教师端固定监听本机，学生端可指定局域网 IP。宿主负责配置路径和嵌入来源，前端沿用 HTTP 接口与播放器插件。
+
+```js
+import {startClassroom} from './classroom/dist/index.js';
+const service = await startClassroom({
+  dbPath: '/your/private/classroom.sqlite3',
+  questionsPath: '/your/private/questions.json',
+  rosterPath: '/your/private/roster.json',
+  studentHost: '127.0.0.1',
+  teacherPort: 4281, studentPort: 4282,
+  frameOrigins: ['http://127.0.0.1:4280']
+});
+// 宿主关闭钩子：await service.stop();
+```
+
+## 从 Python 版本接续数据
+
+停止旧服务，备份完整数据目录，给新服务指定原 `--data-dir`、题库、名册及原端口。SQLite 表结构与作答轮次保持兼容，直接读取原库。保持原 cookie 前缀可继续使用浏览器登录：公开版默认 `html_player`，早期课程版使用 `--cookie-prefix classroom`。数据库只由一个服务实例管理。
