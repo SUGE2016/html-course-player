@@ -1,0 +1,15 @@
+.jump-group button{display:grid;grid-template-columns:42px 1fr;width:100%;padding:9px 7px;border:0;border-bottom:1px solid #dce5ec;background:transparent;color:var(--navy);font:16px "Microsoft YaHei",sans-serif;text-align:left;cursor:pointer}
+.jump-group button:hover,.jump-group button.active{background:#e5f4fb;color:#096a99}
+.jump-group button span:first-child{color:#7b8fa1;font:14px Consolas,monospace}
+.jump-empty{color:var(--muted);font-size:15px}
+.image-lightbox{position:fixed;z-index:100;inset:0;display:flex;align-items:center;justify-content:center;padding:28px;box-sizing:border-box;background:rgba(3,10,18,.94)}
+.image-lightbox[hidden]{display:none}.image-lightbox img{max-width:94vw;max-height:92vh;object-fit:contain}
+.image-lightbox button{position:fixed;top:18px;right:24px;border:0;background:transparent;color:white;font-size:40px;cursor:pointer}
+.terminal-toggle{position:fixed;z-index:30;left:155px;bottom:22px;padding:10px 14px;border:1px solid #2b789f;border-radius:7px;background:rgba(8,24,39,.95);color:#d8f3ff;font:700 15px "Microsoft YaHei",sans-serif;cursor:pointer;box-shadow:0 5px 18px rgba(11,31,51,.2)}
+.terminal-toggle:hover{background:#123b58}.terminal-toggle kbd{margin-left:8px;padding:2px 6px;border:1px solid #4c7691;border-radius:4px;background:#102b40;color:#9fe8f2;font:13px Consolas,monospace}
+.terminal-overlay{position:fixed;z-index:120;inset:0;display:grid;grid-template-rows:58px 1fr;background:#08111f}.terminal-overlay[hidden]{display:none}
+.terminal-overlay header{display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid #24445d;background:#0b1f33;color:white;font-family:"Microsoft YaHei",sans-serif}
+.terminal-overlay header div{display:flex;align-items:baseline;gap:14px}.terminal-overlay header strong{font-size:18px}.terminal-overlay header span{color:#8fb1c6;font-size:14px}
+.terminal-overlay header button{padding:8px 15px;border:1px solid #55d6e8;border-radius:6px;background:transparent;color:#d8f3ff;font:700 14px "Microsoft YaHei",sans-serif;cursor:pointer}
+.terminal-overlay iframe{width:100%;height:100%;border:0;background:#000}
+@media print{.course-player-ui,.viewport-controls,.classroom-toolbar{display:none!important}}

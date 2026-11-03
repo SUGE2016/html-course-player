@@ -1,0 +1,16 @@
+{
+  "name": "html-course-player",
+  "version": "0.1.0",
+  "description": "可复用的离线 HTML 课件播放器与最简示例",
+  "author": "Peter XU",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://github.com/SUGE2016/html-course-player",
+  "repository": { "type": "git", "url": "https://github.com/SUGE2016/html-course-player.git" },
+  "keywords": ["education", "slides", "html"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "demo": "node player/serve.cjs --chapter examples/basic --port 4189",
+    "test": "node tests/smoke.cjs"
+  }
+}
