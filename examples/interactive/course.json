@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "id": "Demo",
+  "title": "编程课互动示例",
+  "content": {"format": "slides-js", "src": "slides.js"},
+  "plugins": {"zoom": {},"classroom":{"questions":"questions.json","points":[[1,"demo-function","函数的输入"],[2,"demo-add","判断返回值"],[3,"demo-tests","测试选择"]]}}
+}
